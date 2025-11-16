@@ -41,3 +41,10 @@ docker run -p 8080:8080 \
 
 ## Introduction to ML
 I wrote a brief introduction to machine learning [here](./introduction_to_supervised_ml.pdf)
+
+## Challnge for Grade C; Lagged air quality
+Adding lagged air quality included by adding calculation of lag_mean to the backfill step, in this case using .shift(1) and then .rolling(window=3) to take the mean of the 3 previous rows of pm25. Similar changes were made to feature pipeline to fill in the new data with means from the latest days. 
+
+The training pipeline also required minor changes and only incldued adding pm25_lag_mean as a feature for the model.
+
+The inference however required some more changes as interference is now done sequentially as the prediction of the day after tomorrow is dependent of the predicted value of tomorrow (and so on).
